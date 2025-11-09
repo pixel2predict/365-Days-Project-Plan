@@ -1,0 +1,2049 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>365 Days Project Plan</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --primary: #6366f1;
+      --primary-dark: #4f46e5;
+      --secondary: #f8fafc;
+      --accent: #06d6a0;
+      --danger: #ef4444;
+      --warning: #f59e0b;
+      --text: #1e293b;
+      --text-light: #64748b;
+      --border: #e2e8f0;
+      --card-bg: #ffffff;
+      --sidebar-bg: #1e293b;
+      --progress-bg: #f1f5f9;
+      --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+      --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: var(--text);
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    .app-container {
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      min-height: 100vh;
+    }
+
+    /* Sidebar */
+    .sidebar {
+      background: var(--sidebar-bg);
+      color: white;
+      padding: 2rem 1.5rem;
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      overflow-y: auto;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 2rem;
+    }
+
+    .logo i {
+      font-size: 1.75rem;
+      color: var(--accent);
+    }
+
+    .logo h1 {
+      font-size: 1.5rem;
+      font-weight: 700;
+    }
+
+    .nav-section {
+      margin-bottom: 2rem;
+    }
+
+    .nav-title {
+      font-size: 0.875rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: #94a3b8;
+      margin-bottom: 1rem;
+    }
+
+    .nav-item {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.75rem 1rem;
+      border-radius: 0.75rem;
+      color: #cbd5e1;
+      text-decoration: none;
+      transition: all 0.2s;
+      margin-bottom: 0.5rem;
+      cursor: pointer;
+      border: none;
+      background: none;
+      width: 100%;
+      text-align: left;
+      font-size: 0.875rem;
+    }
+
+    .nav-item:hover {
+      background: rgba(255, 255, 255, 0.1);
+      color: white;
+    }
+
+    .nav-item.active {
+      background: var(--primary);
+      color: white;
+    }
+
+    .nav-item i {
+      width: 20px;
+      text-align: center;
+    }
+
+    /* Main Content */
+    .main-content {
+      background: var(--secondary);
+      padding: 2rem;
+      overflow-y: auto;
+    }
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 2rem;
+    }
+
+    .header h2 {
+      font-size: 1.875rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .header-actions {
+      display: flex;
+      gap: 1rem;
+    }
+
+    /* Stats Grid */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .stat-card {
+      background: var(--card-bg);
+      padding: 1.5rem;
+      border-radius: 1rem;
+      box-shadow: var(--shadow);
+      border: 1px solid var(--border);
+    }
+
+    .stat-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+    }
+
+    .stat-icon {
+      width: 3rem;
+      height: 3rem;
+      border-radius: 0.75rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.25rem;
+    }
+
+    .stat-icon.primary { background: #e0e7ff; color: var(--primary); }
+    .stat-icon.success { background: #d1fae5; color: var(--accent); }
+    .stat-icon.warning { background: #fef3c7; color: var(--warning); }
+    .stat-icon.danger { background: #fee2e2; color: var(--danger); }
+
+    .stat-value {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 0.25rem;
+    }
+
+    .stat-label {
+      color: var(--text-light);
+      font-size: 0.875rem;
+    }
+
+    /* Progress Section */
+    .progress-section {
+      background: var(--card-bg);
+      padding: 2rem;
+      border-radius: 1rem;
+      box-shadow: var(--shadow);
+      border: 1px solid var(--border);
+      margin-bottom: 2rem;
+    }
+
+    .progress-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.5rem;
+    }
+
+    .progress-bar {
+      height: 12px;
+      background: var(--progress-bg);
+      border-radius: 6px;
+      overflow: hidden;
+      margin-bottom: 1rem;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--primary), var(--accent));
+      border-radius: 6px;
+      transition: width 0.5s ease;
+    }
+
+    .progress-stats {
+      display: flex;
+      justify-content: space-between;
+      color: var(--text-light);
+      font-size: 0.875rem;
+    }
+
+    /* Projects Grid */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .project-card {
+      background: var(--card-bg);
+      border-radius: 1rem;
+      box-shadow: var(--shadow);
+      border: 1px solid var(--border);
+      overflow: hidden;
+      transition: all 0.3s ease;
+    }
+
+    .project-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .project-card.completed {
+      border-left: 4px solid var(--accent);
+    }
+
+    .project-header {
+      padding: 1.5rem;
+      color: white;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .project-header.web { background: var(--primary); }
+    .project-header.app { background: #8b5cf6; }
+    .project-header.python { background: #ef4444; }
+    .project-header.ml { background: #10b981; }
+    .project-header.data { background: #f59e0b; }
+    .project-header.cloud { background: #06b6d4; }
+
+    .project-day {
+      font-size: 0.875rem;
+      opacity: 0.9;
+    }
+
+    .project-category {
+      font-size: 0.75rem;
+      background: rgba(255, 255, 255, 0.2);
+      padding: 0.25rem 0.75rem;
+      border-radius: 1rem;
+    }
+
+    .project-body {
+      padding: 1.5rem;
+    }
+
+    .project-title {
+      font-size: 1.125rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      color: var(--text);
+    }
+
+    .project-description {
+      color: var(--text-light);
+      font-size: 0.875rem;
+      margin-bottom: 1.5rem;
+      line-height: 1.5;
+    }
+
+    .project-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .btn {
+      padding: 0.75rem 1rem;
+      border: none;
+      border-radius: 0.75rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      font-size: 0.875rem;
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background: var(--primary-dark);
+    }
+
+    .btn-success {
+      background: var(--accent);
+      color: white;
+    }
+
+    .btn-outline {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--text-light);
+    }
+
+    .btn-outline:hover {
+      border-color: var(--primary);
+      color: var(--primary);
+    }
+
+    .btn-danger {
+      background: var(--danger);
+      color: white;
+    }
+
+    .link-input {
+      width: 100%;
+      padding: 0.75rem;
+      border: 1px solid var(--border);
+      border-radius: 0.75rem;
+      font-size: 0.875rem;
+    }
+
+    .link-input:focus {
+      outline: none;
+      border-color: var(--primary);
+    }
+
+    .link-display {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.75rem;
+      background: #f8fafc;
+      border-radius: 0.75rem;
+      font-size: 0.875rem;
+    }
+
+    .link-display a {
+      color: var(--primary);
+      text-decoration: none;
+      flex: 1;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .link-display button {
+      background: none;
+      border: none;
+      color: var(--danger);
+      cursor: pointer;
+      padding: 0.25rem;
+    }
+
+    /* Search and Filters */
+    .search-section {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 2rem;
+      align-items: center;
+    }
+
+    .search-box {
+      flex: 1;
+      position: relative;
+    }
+
+    .search-box input {
+      width: 100%;
+      padding: 0.75rem 1rem 0.75rem 2.5rem;
+      border: 1px solid var(--border);
+      border-radius: 0.75rem;
+      background: var(--card-bg);
+      font-size: 0.875rem;
+    }
+
+    .search-box i {
+      position: absolute;
+      left: 1rem;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-light);
+    }
+
+    .filter-buttons {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    .filter-btn {
+      padding: 0.5rem 1rem;
+      border: 1px solid var(--border);
+      background: var(--card-bg);
+      border-radius: 0.75rem;
+      font-size: 0.875rem;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .filter-btn.active {
+      background: var(--primary);
+      color: white;
+      border-color: var(--primary);
+    }
+
+    /* Toast Notification */
+    .toast {
+      position: fixed;
+      top: 2rem;
+      right: 2rem;
+      background: var(--accent);
+      color: white;
+      padding: 1rem 1.5rem;
+      border-radius: 0.75rem;
+      box-shadow: var(--shadow-lg);
+      transform: translateX(400px);
+      transition: transform 0.3s ease;
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .toast.show {
+      transform: translateX(0);
+    }
+
+    .toast.error {
+      background: var(--danger);
+    }
+
+    /* Empty State */
+    .empty-state {
+      grid-column: 1 / -1;
+      text-align: center;
+      padding: 3rem;
+      color: var(--text-light);
+    }
+
+    .empty-state i {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      opacity: 0.5;
+    }
+
+    /* Modal */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .modal-content {
+      background: var(--card-bg);
+      padding: 2rem;
+      border-radius: 1rem;
+      box-shadow: var(--shadow-lg);
+      width: 90%;
+      max-width: 500px;
+      max-height: 90vh;
+      overflow-y: auto;
+    }
+
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.5rem;
+    }
+
+    .modal-header h3 {
+      margin: 0;
+      color: var(--text);
+    }
+
+    .close-modal {
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: var(--text-light);
+    }
+
+    .form-group {
+      margin-bottom: 1rem;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 0.5rem;
+      color: var(--text);
+      font-weight: 500;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      padding: 0.75rem;
+      border: 1px solid var(--border);
+      border-radius: 0.75rem;
+      font-size: 0.875rem;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: var(--primary);
+    }
+
+    .form-actions {
+      display: flex;
+      gap: 1rem;
+      justify-content: flex-end;
+      margin-top: 1.5rem;
+    }
+
+    /* Achievements Grid */
+    .achievements-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .achievement-card {
+      background: var(--card-bg);
+      padding: 1.5rem;
+      border-radius: 1rem;
+      box-shadow: var(--shadow);
+      border: 1px solid var(--border);
+      text-align: center;
+      transition: all 0.3s ease;
+    }
+
+    .achievement-card.locked {
+      opacity: 0.6;
+    }
+
+    .achievement-icon {
+      width: 4rem;
+      height: 4rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      margin: 0 auto 1rem;
+      background: var(--progress-bg);
+      color: var(--text-light);
+    }
+
+    .achievement-card.unlocked .achievement-icon {
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      color: white;
+    }
+
+    .achievement-title {
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      color: var(--text);
+    }
+
+    .achievement-desc {
+      color: var(--text-light);
+      font-size: 0.875rem;
+      margin-bottom: 1rem;
+    }
+
+    .achievement-progress {
+      height: 4px;
+      background: var(--progress-bg);
+      border-radius: 2px;
+      overflow: hidden;
+      margin-bottom: 0.5rem;
+    }
+
+    .achievement-progress-fill {
+      height: 100%;
+      background: var(--accent);
+      border-radius: 2px;
+      transition: width 0.3s ease;
+    }
+
+    .achievement-stats {
+      font-size: 0.75rem;
+      color: var(--text-light);
+    }
+
+    /* Progress Charts */
+    .charts-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .chart-card {
+      background: var(--card-bg);
+      padding: 1.5rem;
+      border-radius: 1rem;
+      box-shadow: var(--shadow);
+      border: 1px solid var(--border);
+    }
+
+    .chart-header {
+      margin-bottom: 1rem;
+    }
+
+    .chart-header h3 {
+      margin: 0;
+      color: var(--text);
+    }
+
+    .chart-container {
+      height: 200px;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Mobile Menu */
+    .mobile-menu-btn {
+      display: none;
+      background: none;
+      border: none;
+      color: var(--text);
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+
+    /* Responsive */
+    @media (max-width: 1024px) {
+      .app-container {
+        grid-template-columns: 1fr;
+      }
+      
+      .sidebar {
+        display: none;
+        position: fixed;
+        width: 280px;
+        z-index: 100;
+      }
+      
+      .sidebar.mobile-open {
+        display: block;
+      }
+      
+      .mobile-menu-btn {
+        display: block;
+      }
+      
+      .projects-grid,
+      .achievements-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .main-content {
+        padding: 1rem;
+      }
+      
+      .stats-grid,
+      .charts-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .search-section {
+        flex-direction: column;
+      }
+      
+      .filter-buttons {
+        width: 100%;
+        overflow-x: auto;
+        padding-bottom: 0.5rem;
+      }
+      
+      .header {
+        flex-direction: column;
+        gap: 1rem;
+        align-items: flex-start;
+      }
+      
+      .header-actions {
+        width: 100%;
+        justify-content: space-between;
+      }
+      
+      .project-link {
+        flex-direction: column;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .stats-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .form-actions {
+        flex-direction: column;
+      }
+      
+      .header-actions {
+        flex-direction: column;
+      }
+    }
+
+    /* View Management */
+    .view {
+      display: block;
+    }
+
+    .view.hidden {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="app-container">
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+      <div class="logo">
+        <i class="fas fa-rocket"></i>
+        <h1>365 Projects</h1>
+      </div>
+      
+      <nav class="nav-section">
+        <div class="nav-title">Main</div>
+        <button class="nav-item active" data-view="dashboard">
+          <i class="fas fa-home"></i>
+          <span>Dashboard</span>
+        </button>
+        <button class="nav-item" data-view="progress">
+          <i class="fas fa-chart-line"></i>
+          <span>Progress Analytics</span>
+        </button>
+        <button class="nav-item" data-view="achievements">
+          <i class="fas fa-trophy"></i>
+          <span>Achievements</span>
+        </button>
+      </nav>
+      
+      <nav class="nav-section">
+        <div class="nav-title">Categories</div>
+        <button class="nav-item active" data-filter="all">
+          <i class="fas fa-layer-group"></i>
+          <span>All Projects</span>
+        </button>
+        <button class="nav-item" data-filter="web">
+          <i class="fas fa-globe"></i>
+          <span>Web Development</span>
+        </button>
+        <button class="nav-item" data-filter="app">
+          <i class="fas fa-mobile-alt"></i>
+          <span>App Development</span>
+        </button>
+        <button class="nav-item" data-filter="python">
+          <i class="fab fa-python"></i>
+          <span>Python</span>
+        </button>
+        <button class="nav-item" data-filter="ml">
+          <i class="fas fa-brain"></i>
+          <span>ML & AI</span>
+        </button>
+        <button class="nav-item" data-filter="data">
+          <i class="fas fa-chart-bar"></i>
+          <span>Data Science</span>
+        </button>
+        <button class="nav-item" data-filter="cloud">
+          <i class="fas fa-cloud"></i>
+          <span>Cloud & DevOps</span>
+        </button>
+      </nav>
+      
+      <nav class="nav-section">
+        <div class="nav-title">Tools</div>
+        <button class="nav-item" id="exportBtn">
+          <i class="fas fa-download"></i>
+          <span>Export Data</span>
+        </button>
+        <button class="nav-item" id="importBtn">
+          <i class="fas fa-upload"></i>
+          <span>Import Data</span>
+        </button>
+        <button class="nav-item" id="resetBtn">
+          <i class="fas fa-trash"></i>
+          <span>Reset Progress</span>
+        </button>
+      </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <!-- Mobile Menu Button -->
+      <button class="mobile-menu-btn" id="mobileMenuBtn">
+        <i class="fas fa-bars"></i>
+      </button>
+
+      <!-- Dashboard View -->
+      <div class="view" id="dashboard-view">
+        <div class="header">
+          <h2>Project Dashboard</h2>
+          <div class="header-actions">
+            <button class="btn btn-outline" id="refreshBtn">
+              <i class="fas fa-sync-alt"></i>
+              Refresh
+            </button>
+            <button class="btn btn-primary" id="newProjectBtn">
+              <i class="fas fa-plus"></i>
+              New Project
+            </button>
+          </div>
+        </div>
+
+        <!-- Stats Grid -->
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-header">
+              <div>
+                <div class="stat-value" id="completed-count">0</div>
+                <div class="stat-label">Completed</div>
+              </div>
+              <div class="stat-icon success">
+                <i class="fas fa-check-circle"></i>
+              </div>
+            </div>
+          </div>
+          
+          <div class="stat-card">
+            <div class="stat-header">
+              <div>
+                <div class="stat-value" id="remaining-count">365</div>
+                <div class="stat-label">Remaining</div>
+              </div>
+              <div class="stat-icon primary">
+                <i class="fas fa-tasks"></i>
+              </div>
+            </div>
+          </div>
+          
+          <div class="stat-card">
+            <div class="stat-header">
+              <div>
+                <div class="stat-value" id="percentage">0%</div>
+                <div class="stat-label">Progress</div>
+              </div>
+              <div class="stat-icon warning">
+                <i class="fas fa-chart-pie"></i>
+              </div>
+            </div>
+          </div>
+          
+          <div class="stat-card">
+            <div class="stat-header">
+              <div>
+                <div class="stat-value" id="streak-count">0</div>
+                <div class="stat-label">Day Streak</div>
+              </div>
+              <div class="stat-icon danger">
+                <i class="fas fa-fire"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Progress Section -->
+        <div class="progress-section">
+          <div class="progress-header">
+            <h3>Your Progress Journey</h3>
+            <div class="progress-stats">
+              <span id="progress-text">0 of 365 projects completed</span>
+            </div>
+          </div>
+          <div class="progress-bar">
+            <div class="progress-fill" id="progress-bar"></div>
+          </div>
+        </div>
+
+        <!-- Search and Filters -->
+        <div class="search-section">
+          <div class="search-box">
+            <i class="fas fa-search"></i>
+            <input type="text" id="searchInput" placeholder="Search projects...">
+          </div>
+          <div class="filter-buttons">
+            <button class="filter-btn active" data-filter="all">All</button>
+            <button class="filter-btn" data-filter="web">Web</button>
+            <button class="filter-btn" data-filter="app">App</button>
+            <button class="filter-btn" data-filter="python">Python</button>
+            <button class="filter-btn" data-filter="ml">ML/AI</button>
+            <button class="filter-btn" data-filter="data">Data</button>
+            <button class="filter-btn" data-filter="cloud">Cloud</button>
+          </div>
+        </div>
+
+        <!-- Projects Grid -->
+        <div class="projects-grid" id="projects-container">
+          <div class="empty-state">
+            <i class="fas fa-spinner fa-spin"></i>
+            <h3>Loading Projects...</h3>
+            <p>Your 365-day coding journey is about to begin!</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Progress Analytics View -->
+      <div class="view hidden" id="progress-view">
+        <div class="header">
+          <h2>Progress Analytics</h2>
+          <div class="header-actions">
+            <button class="btn btn-outline" id="backToDashboard">
+              <i class="fas fa-arrow-left"></i>
+              Back to Dashboard
+            </button>
+          </div>
+        </div>
+
+        <div class="charts-grid">
+          <div class="chart-card">
+            <div class="chart-header">
+              <h3>Completion Progress</h3>
+            </div>
+            <div class="chart-container" id="completion-chart">
+              <div class="empty-state" style="padding: 1rem;">
+                <i class="fas fa-chart-line"></i>
+                <p>Completion progress visualization</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="chart-card">
+            <div class="chart-header">
+              <h3>Category Distribution</h3>
+            </div>
+            <div class="chart-container" id="category-chart">
+              <div class="empty-state" style="padding: 1rem;">
+                <i class="fas fa-chart-pie"></i>
+                <p>Category distribution visualization</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="progress-section">
+          <div class="progress-header">
+            <h3>Weekly Progress</h3>
+          </div>
+          <div class="progress-stats" id="weekly-stats">
+            Loading weekly statistics...
+          </div>
+        </div>
+
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-header">
+              <div>
+                <div class="stat-value" id="avg-weekly">0</div>
+                <div class="stat-label">Avg/Week</div>
+              </div>
+              <div class="stat-icon primary">
+                <i class="fas fa-calendar-week"></i>
+              </div>
+            </div>
+          </div>
+          
+          <div class="stat-card">
+            <div class="stat-header">
+              <div>
+                <div class="stat-value" id="completion-rate">0%</div>
+                <div class="stat-label">Completion Rate</div>
+              </div>
+              <div class="stat-icon success">
+                <i class="fas fa-tachometer-alt"></i>
+              </div>
+            </div>
+          </div>
+          
+          <div class="stat-card">
+            <div class="stat-header">
+              <div>
+                <div class="stat-value" id="days-remaining">365</div>
+                <div class="stat-label">Days Remaining</div>
+              </div>
+              <div class="stat-icon warning">
+                <i class="fas fa-clock"></i>
+              </div>
+            </div>
+          </div>
+          
+          <div class="stat-card">
+            <div class="stat-header">
+              <div>
+                <div class="stat-value" id="estimated-completion">-</div>
+                <div class="stat-label">Est. Completion</div>
+              </div>
+              <div class="stat-icon danger">
+                <i class="fas fa-flag-checkered"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Achievements View -->
+      <div class="view hidden" id="achievements-view">
+        <div class="header">
+          <h2>Achievements</h2>
+          <div class="header-actions">
+            <button class="btn btn-outline" id="backToDashboard2">
+              <i class="fas fa-arrow-left"></i>
+              Back to Dashboard
+            </button>
+          </div>
+        </div>
+
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-header">
+              <div>
+                <div class="stat-value" id="achievements-unlocked">0</div>
+                <div class="stat-label">Unlocked</div>
+              </div>
+              <div class="stat-icon success">
+                <i class="fas fa-trophy"></i>
+              </div>
+            </div>
+          </div>
+          
+          <div class="stat-card">
+            <div class="stat-header">
+              <div>
+                <div class="stat-value" id="achievements-total">12</div>
+                <div class="stat-label">Total Available</div>
+              </div>
+              <div class="stat-icon primary">
+                <i class="fas fa-star"></i>
+              </div>
+            </div>
+          </div>
+          
+          <div class="stat-card">
+            <div class="stat-header">
+              <div>
+                <div class="stat-value" id="achievements-progress">0%</div>
+                <div class="stat-label">Completion</div>
+              </div>
+              <div class="stat-icon warning">
+                <i class="fas fa-chart-line"></i>
+              </div>
+            </div>
+          </div>
+          
+          <div class="stat-card">
+            <div class="stat-header">
+              <div>
+                <div class="stat-value" id="next-achievement">-</div>
+                <div class="stat-label">Next Achievement</div>
+              </div>
+              <div class="stat-icon danger">
+                <i class="fas fa-bullseye"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="achievements-grid" id="achievements-container">
+          <!-- Achievements will be loaded here -->
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- Toast Notification -->
+  <div class="toast" id="toast">
+    <i class="fas fa-check-circle"></i>
+    <span id="toast-message">Operation completed successfully!</span>
+  </div>
+
+  <!-- New Project Modal -->
+  <div class="modal" id="newProjectModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>Add New Project</h3>
+        <button class="close-modal">&times;</button>
+      </div>
+      <form id="newProjectForm">
+        <div class="form-group">
+          <label for="projectTitle">Project Title *</label>
+          <input type="text" id="projectTitle" required placeholder="Enter project title">
+        </div>
+        <div class="form-group">
+          <label for="projectCategory">Category *</label>
+          <select id="projectCategory" required>
+            <option value="">Select a category</option>
+            <option value="web">Web Development</option>
+            <option value="app">App Development</option>
+            <option value="python">Python Development</option>
+            <option value="ml">Machine Learning / AI</option>
+            <option value="data">Data Science</option>
+            <option value="cloud">Cloud / Deployment</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="projectDescription">Description</label>
+          <textarea id="projectDescription" rows="3" placeholder="Describe your project..."></textarea>
+        </div>
+        <div class="form-actions">
+          <button type="button" class="btn btn-outline close-modal">Cancel</button>
+          <button type="submit" class="btn btn-primary">Add Project</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Hidden File Input -->
+  <input type="file" id="importFile" accept="application/json" hidden>
+
+  <script>
+    // ---- Data Storage ----
+    const STORAGE_KEYS = {
+      PROJECTS: '365_projects_data',
+      LINKS: '365_project_links',
+      CUSTOM_PROJECTS: '365_custom_projects'
+    };
+
+    // Project categories data
+    const categories = {
+      "web": {
+        "name": "Web Development",
+        "icon": "fas fa-globe",
+        "projects": [
+          "Portfolio Website", "Blog Platform", "Netflix Clone", "LinkedIn Clone",
+          "Weather App", "Resume Builder", "Job Portal", "Restaurant Finder",
+          "E-Commerce Website", "Music Player Web App", "Responsive Portfolio",
+          "News Portal", "Quiz App", "Movie Explorer", "Task Tracker",
+          "Online Exam Website", "Donation Platform", "Food Recipe Finder",
+          "Photo Gallery", "Travel Blog", "Book Review Website",
+          "Landing Page", "Event Registration Form", "Password Generator",
+          "Responsive Navbar", "Multi-step Form", "Currency Converter",
+          "Sticky Notes App", "Image Carousel", "Real-time Chat UI",
+          "Countdown Timer", "To-do List Web", "Parallax Scrolling Site",
+          "Digital Clock", "Portfolio Analytics Page", "Restaurant Menu Page",
+          "Animated Login Page", "Markdown Editor", "File Upload Page",
+          "E-learning Website", "Admin Dashboard", "Movie Review Page",
+          "Quiz Web App", "Expense Tracker Web", "Weather Dashboard",
+          "Product Landing Page", "Poll Voting Website", "Portfolio v2",
+          "Dark/Light Theme Website", "E-Commerce Cart Page",
+          "Login/Signup Form", "Product Review Section", "Portfolio Gallery",
+          "Portfolio Resume Integration", "Survey Form", "Portfolio Contact Page",
+          "Simple Portfolio Template", "Social Media Dashboard",
+          "Personal Blog Website", "Image Search Website", "Feedback Form"
+        ]
+      },
+      "app": {
+        "name": "App Development",
+        "icon": "fas fa-mobile-alt",
+        "projects": [
+          "Expense Tracker App", "Chat App", "News App", "E-Learning App",
+          "Food Delivery App", "Fitness Tracker", "Notes App", "BMI Calculator",
+          "Flashcards App", "Travel Planner App", "Quiz App", "Weather App",
+          "Music Player App", "Calendar App", "Habit Tracker",
+          "Recipe App", "Quotes App", "To-Do List App", "Reminder App",
+          "Currency Converter App", "Photo Editor App", "Video Player App",
+          "PDF Reader App", "AI Chatbot App", "Voice Assistant App",
+          "Meditation App", "Workout Planner", "Grocery List App",
+          "Expense Splitter", "Timer App", "Stopwatch App",
+          "Dictionary App", "Translator App", "QR Scanner App",
+          "Wallpaper App", "Note Reminder", "Online Exam App",
+          "Shopping App UI", "Book Reader App", "Portfolio App",
+          "Social Media Feed App", "Login/Register App", "Fitness Planner",
+          "AI Study Assistant", "Budget Manager", "Language Learning App",
+          "Music Recommendation App", "AI Resume Builder", "Portfolio Showcase App",
+          "Expense Dashboard", "Virtual Study Room App", "Food Menu App",
+          "AI Fitness Coach", "Voice Memo App", "Planner App",
+          "Pet Care App", "Chat AI App", "Real-time Poll App",
+          "Flash Notes App", "Mental Health Journal", "Daily Habit App"
+        ]
+      },
+      "python": {
+        "name": "Python Development",
+        "icon": "fab fa-python",
+        "projects": [
+          "File Organizer", "PDF Merger", "Email Sender", "QR Code Generator",
+          "URL Shortener", "Clipboard Manager", "Voice Assistant", "YouTube Downloader",
+          "System Monitor", "Weather CLI App", "Password Generator", "Image Converter",
+          "File Encryptor", "Folder Sync Tool", "Expense Tracker CLI",
+          "CSV Merger", "Excel Report Generator", "Invoice Creator",
+          "PDF Splitter", "File Renamer", "Text to Speech",
+          "Speech to Text", "Screen Recorder", "Web Scraper",
+          "News Scraper", "Automation Bot", "Instagram Bot",
+          "WhatsApp Messenger", "Weather Alert Bot", "Clipboard Logger",
+          "Timer App CLI", "Task Reminder CLI", "Data Backup Script",
+          "Log Analyzer", "JSON Formatter", "System Cleanup Script",
+          "Duplicate File Remover", "Python Notes App", "File Compression Tool",
+          "IP Tracker", "Stock Price Tracker", "Currency Rate Tracker",
+          "Image Downloader", "PDF Password Protector", "File Organizer 2.0",
+          "AI Text Generator CLI", "Markdown to HTML Converter",
+          "CSV Formatter", "PDF Merger Pro", "File Sync CLI",
+          "Expense Report Tool", "AI Prompt Saver", "CLI Todo App",
+          "Data Sorter", "Terminal Weather", "Text File Cleaner",
+          "Screenshot Tool", "Clipboard Utility", "Local Chatbot CLI",
+          "CLI Password Vault"
+        ]
+      },
+      "ml": {
+        "name": "Machine Learning / AI",
+        "icon": "fas fa-brain",
+        "projects": [
+          "Fake News Detector", "Spam Mail Classifier", "Movie Recommendation System",
+          "Diabetes Prediction", "House Price Prediction", "Face Emotion Detector",
+          "ChatGPT Assistant", "Plant Disease Classifier", "Image Caption Generator",
+          "Text Summarizer", "Resume Screener", "Car Price Predictor",
+          "Customer Segmentation", "Stock Price Prediction", "Sentiment Analyzer",
+          "Language Translator", "Speech Emotion Recognizer", "Video Caption Generator",
+          "Voice Command Recognition", "AI Text Generator", "Music Genre Classification",
+          "Air Quality Prediction", "Crop Recommendation System",
+          "Sign Language Recognition", "AI Code Helper", "AI Tutor Chatbot",
+          "Job Recommendation System", "AI Interview Bot", "AI Email Classifier",
+          "PDF Q&A Bot", "AI Content Rewriter", "Chatbot for Learning",
+          "AI Resume Ranker", "AI Course Recommender", "Fake Profile Detector",
+          "Emotion Detection App", "Spam Detector Web", "AI Health Assistant",
+          "AI Virtual Assistant", "Speech Translator", "AI Music Composer",
+          "AI Study Planner", "AI Notes Generator", "AI News Summarizer",
+          "AI Legal Document Parser", "AI Quiz Generator", "AI Research Summarizer",
+          "AI Review Classifier", "AI Finance Predictor", "AI Stock Recommender",
+          "AI Travel Planner", "AI Tutor App", "AI Assistant App",
+          "AI Chat Dashboard", "AI Blog Writer", "AI Emotion Classifier",
+          "AI PDF Reader", "AI Document Summarizer", "AI Meeting Summarizer",
+          "AI Voice Chatbot", "AI Text Analyzer", "AI Translator App"
+        ]
+      },
+      "data": {
+        "name": "Data Science",
+        "icon": "fas fa-chart-bar",
+        "projects": [
+          "IPL Data Analysis", "COVID Data Tracker", "E-commerce Dashboard",
+          "Crime Data Visualization", "Customer Segmentation", "Stock Market Analysis",
+          "Social Media Analytics", "Sentiment Analysis Dashboard", "Survey Insights App",
+          "Startup Growth Dashboard", "Population Data Visualization", "Income Distribution Analysis",
+          "Education Stats Dashboard", "Weather Trend Analysis", "Poll Result Dashboard",
+          "Energy Consumption Report", "Employment Trends Visualization",
+          "Healthcare Analytics", "Retail Sales Analysis", "YouTube Channel Insights",
+          "Financial Market Analysis", "Expense Insights Dashboard", "Startup Success Analytics",
+          "Customer Feedback Analysis", "Real Estate Trends", "Climate Data Visualization",
+          "Movie Rating Dashboard", "Air Quality Trends", "Sports Performance Analytics",
+          "Online Sales Dashboard", "Traffic Analysis", "Election Data Insights",
+          "Business Growth Trends", "Data Cleaning Automation", "Power Consumption Report",
+          "Product Review Analysis", "GDP Growth Analysis", "Revenue Report Generator",
+          "E-learning Performance Dashboard", "Survey Trends Visualizer",
+          "Product Demand Forecast", "Income Growth Tracker", "Twitter Data Analytics",
+          "Sales Comparison Report", "Streaming Data Dashboard", "Ad Campaign Insights",
+          "Health Data Analytics", "Loan Analysis Report", "Music Trends Visualization",
+          "Crime Trends Dashboard", "Retail Customer Analytics", "Data Distribution Visualizer",
+          "Company Performance Tracker", "Portfolio Analytics", "Market Share Dashboard",
+          "Industry Insights", "Public Sentiment Map", "Poll Analyzer", "Web Traffic Analyzer",
+          "Survey Analyzer", "Course Completion Dashboard", "Stock Insights Tracker"
+        ]
+      },
+      "cloud": {
+        "name": "Cloud / Deployment",
+        "icon": "fas fa-cloud",
+        "projects": [
+          "Flask App on Render", "Firebase Auth Integration", "Dockerized Flask App",
+          "CI/CD with GitHub Actions", "Streamlit App Deployment", "AWS Lambda Function",
+          "Cloud Firestore Integration", "Vercel React Deployment", "Docker + MongoDB Setup",
+          "Serverless API Hosting", "Kubernetes Basics", "Google Cloud Deployment",
+          "ML Model Deployment", "Cloud API Gateway", "CI/CD for Flutter",
+          "AWS S3 File Storage", "Firebase Cloud Functions", "Render API Hosting",
+          "FastAPI on Cloud", "ML Model on Hugging Face", "Heroku App Deployment",
+          "Google Sheets API", "AWS DynamoDB Setup", "Cloud Monitoring Dashboard",
+          "Docker Compose Project", "Firebase Hosting", "AWS CloudFront Setup",
+          "Serverless Flask App", "GitHub Actions Workflow", "Docker Build Automation",
+          "Deploy React with Nginx", "Vercel Next.js Deployment", "AI API Deployment",
+          "AWS Rekognition Integration", "Dockerized Streamlit App", "Cloud ML Workflow",
+          "Firebase Storage Management", "CI/CD for MERN Stack", "AWS CloudFormation",
+          "Serverless Webhooks", "Cloud Security Monitor", "Flask + MySQL on Cloud",
+          "Containerized Django App", "Google Colab Integration", "API Gateway Deployment",
+          "AWS Batch Job", "Cloud Cost Optimizer", "Data Pipeline Setup",
+          "Server Monitoring System", "API Load Testing Setup", "CI/CD API Automation",
+          "GCP Storage Integration", "Azure Web App Deployment", "AWS Lambda Webhook",
+          "Container Orchestration", "Serverless Model Hosting", "Firebase Push Notifications",
+          "AWS Elastic Beanstalk", "GCP Pub/Sub Integration", "Realtime Cloud Dashboard",
+          "AI API Scaling", "Docker Security Setup"
+        ]
+      }
+    };
+
+    // Achievements data
+    const achievements = [
+      { id: 1, title: "First Steps", description: "Complete your first project", requirement: 1, icon: "fas fa-baby" },
+      { id: 2, title: "Week Warrior", description: "Complete 7 projects in a week", requirement: 7, icon: "fas fa-calendar-week" },
+      { id: 3, title: "Month Master", description: "Complete 30 projects", requirement: 30, icon: "fas fa-calendar-alt" },
+      { id: 4, title: "Halfway Hero", description: "Complete 50% of all projects", requirement: 183, icon: "fas fa-medal" },
+      { id: 5, title: "Web Wizard", description: "Complete all web development projects", requirement: 61, category: "web", icon: "fas fa-globe" },
+      { id: 6, title: "App Ace", description: "Complete all app development projects", requirement: 60, category: "app", icon: "fas fa-mobile-alt" },
+      { id: 7, title: "Python Pro", description: "Complete all Python projects", requirement: 60, category: "python", icon: "fab fa-python" },
+      { id: 8, title: "ML Maestro", description: "Complete all ML/AI projects", requirement: 60, category: "ml", icon: "fas fa-brain" },
+      { id: 9, title: "Data Dynamo", description: "Complete all data science projects", requirement: 61, category: "data", icon: "fas fa-chart-bar" },
+      { id: 10, title: "Cloud Commander", description: "Complete all cloud projects", requirement: 60, category: "cloud", icon: "fas fa-cloud" },
+      { id: 11, title: "Consistency King", description: "Maintain a 30-day streak", requirement: 30, streak: true, icon: "fas fa-fire" },
+      { id: 12, title: "Project Prodigy", description: "Complete all 365 projects", requirement: 365, icon: "fas fa-trophy" }
+    ];
+
+    // ---- DOM Elements ----
+    const projectsContainer = document.getElementById('projects-container');
+    const achievementsContainer = document.getElementById('achievements-container');
+    const searchInput = document.getElementById('searchInput');
+    const progressBar = document.getElementById('progress-bar');
+    const progressText = document.getElementById('progress-text');
+    const completedCount = document.getElementById('completed-count');
+    const remainingCount = document.getElementById('remaining-count');
+    const percentage = document.getElementById('percentage');
+    const streakCount = document.getElementById('streak-count');
+    const toast = document.getElementById('toast');
+    const toastMessage = document.getElementById('toast-message');
+    const newProjectModal = document.getElementById('newProjectModal');
+    const newProjectForm = document.getElementById('newProjectForm');
+    const sidebar = document.getElementById('sidebar');
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+
+    // Progress view elements
+    const avgWeekly = document.getElementById('avg-weekly');
+    const completionRate = document.getElementById('completion-rate');
+    const daysRemaining = document.getElementById('days-remaining');
+    const estimatedCompletion = document.getElementById('estimated-completion');
+    const weeklyStats = document.getElementById('weekly-stats');
+
+    // Achievements view elements
+    const achievementsUnlocked = document.getElementById('achievements-unlocked');
+    const achievementsTotal = document.getElementById('achievements-total');
+    const achievementsProgress = document.getElementById('achievements-progress');
+    const nextAchievement = document.getElementById('next-achievement');
+
+    // ---- State ----
+    let currentFilter = 'all';
+    let searchTerm = '';
+    let projects = [];
+    let customProjects = [];
+    let currentView = 'dashboard';
+
+    // ---- View Management ----
+    function showView(viewName) {
+      // Hide all views
+      document.querySelectorAll('.view').forEach(view => {
+        view.classList.add('hidden');
+      });
+      
+      // Show selected view
+      document.getElementById(`${viewName}-view`).classList.remove('hidden');
+      
+      // Update active nav item
+      document.querySelectorAll('.nav-item[data-view]').forEach(item => {
+        item.classList.toggle('active', item.dataset.view === viewName);
+      });
+      
+      currentView = viewName;
+      
+      // Refresh view-specific data
+      if (viewName === 'progress') {
+        updateProgressAnalytics();
+      } else if (viewName === 'achievements') {
+        updateAchievements();
+      }
+      
+      // Close mobile menu
+      if (window.innerWidth <= 1024) {
+        sidebar.classList.remove('mobile-open');
+      }
+    }
+
+    // ---- Data Management ----
+    function loadProjects() {
+      try {
+        const data = localStorage.getItem(STORAGE_KEYS.PROJECTS);
+        const customData = localStorage.getItem(STORAGE_KEYS.CUSTOM_PROJECTS);
+        
+        let projects = data ? JSON.parse(data) : generateInitialProjects();
+        customProjects = customData ? JSON.parse(customData) : [];
+        
+        // Combine predefined and custom projects
+        const allProjects = [...projects, ...customProjects];
+        saveProjects(allProjects);
+        return allProjects;
+      } catch {
+        const projects = generateInitialProjects();
+        saveProjects(projects);
+        return projects;
+      }
+    }
+
+    function saveProjects(projects) {
+      // Separate predefined and custom projects
+      const predefinedProjects = projects.filter(p => p.day && p.day <= 365);
+      const customProjects = projects.filter(p => !p.day || p.day > 365);
+      
+      localStorage.setItem(STORAGE_KEYS.PROJECTS, JSON.stringify(predefinedProjects));
+      localStorage.setItem(STORAGE_KEYS.CUSTOM_PROJECTS, JSON.stringify(customProjects));
+    }
+
+    function loadLinks() {
+      try {
+        const data = localStorage.getItem(STORAGE_KEYS.LINKS);
+        return data ? JSON.parse(data) : {};
+      } catch {
+        return {};
+      }
+    }
+
+    function saveLinks(links) {
+      localStorage.setItem(STORAGE_KEYS.LINKS, JSON.stringify(links));
+    }
+
+    function generateInitialProjects() {
+      const projects = [];
+      let dayCounter = 1;
+      
+      for (const [categoryKey, categoryData] of Object.entries(categories)) {
+        for (const project of categoryData.projects) {
+          projects.push({
+            day: dayCounter,
+            title: project,
+            category: categoryKey,
+            category_name: categoryData.name,
+            description: `Build a ${project} using tools relevant to ${categoryData.name}.`,
+            is_completed: false,
+            project_link: '',
+            is_custom: false
+          });
+          dayCounter++;
+        }
+      }
+      
+      return projects;
+    }
+
+    function addCustomProject(projectData) {
+      const newProject = {
+        day: 366 + customProjects.length, // Start custom projects from day 366
+        title: projectData.title,
+        category: projectData.category,
+        category_name: categories[projectData.category].name,
+        description: projectData.description || `Build a custom ${projectData.title} project.`,
+        is_completed: false,
+        project_link: '',
+        is_custom: true
+      };
+      
+      customProjects.push(newProject);
+      projects.push(newProject);
+      saveProjects(projects);
+      return newProject;
+    }
+
+    // ---- Rendering ----
+    function renderProjects() {
+      const filteredProjects = filterProjects();
+      projectsContainer.innerHTML = '';
+      
+      if (!filteredProjects.length) {
+        projectsContainer.innerHTML = `
+          <div class="empty-state">
+            <i class="fas fa-search"></i>
+            <h3>No Projects Found</h3>
+            <p>Try adjusting your search or filter criteria</p>
+          </div>
+        `;
+        return;
+      }
+      
+      filteredProjects.forEach(project => {
+        const projectCard = createProjectCard(project);
+        projectsContainer.appendChild(projectCard);
+      });
+    }
+
+    function filterProjects() {
+      return projects.filter(project => {
+        // Filter by category
+        if (currentFilter !== 'all' && project.category !== currentFilter) {
+          return false;
+        }
+        
+        // Filter by search term
+        if (searchTerm) {
+          const searchLower = searchTerm.toLowerCase();
+          const titleMatch = project.title.toLowerCase().includes(searchLower);
+          const descMatch = project.description.toLowerCase().includes(searchLower);
+          if (!titleMatch && !descMatch) {
+            return false;
+          }
+        }
+        
+        return true;
+      });
+    }
+
+    function createProjectCard(project) {
+      const isCompleted = project.is_completed;
+      const links = loadLinks();
+      const savedLink = links[project.day] || '';
+      const isCustom = project.is_custom;
+      
+      const card = document.createElement('div');
+      card.className = `project-card ${isCompleted ? 'completed' : ''}`;
+      card.innerHTML = `
+        <div class="project-header ${project.category}">
+          <div class="project-day">${isCustom ? 'Custom' : 'Day'} ${project.day}</div>
+          <div class="project-category">${project.category_name.split(' ')[0]} ${isCustom ? '★' : ''}</div>
+        </div>
+        <div class="project-body">
+          <h3 class="project-title">${escapeHtml(project.title)}</h3>
+          <p class="project-description">${escapeHtml(project.description)}</p>
+          <div class="project-actions">
+            <button class="btn ${isCompleted ? 'btn-outline' : 'btn-primary'}" data-day="${project.day}">
+              <i class="fas ${isCompleted ? 'fa-undo' : 'fa-check'}"></i>
+              ${isCompleted ? 'Mark Incomplete' : 'Mark Complete'}
+            </button>
+            ${isCompleted ? `
+              <div class="project-link">
+                <input type="url" 
+                       placeholder="https://your-project-link.com" 
+                       value="${savedLink}" 
+                       data-day="${project.day}" 
+                       class="link-input">
+                <button class="btn btn-success" data-save="${project.day}">
+                  <i class="fas fa-save"></i>
+                  Save
+                </button>
+              </div>
+              ${savedLink ? `
+                <div class="link-display">
+                  <a href="${savedLink}" target="_blank" rel="noopener">
+                    <i class="fas fa-external-link-alt"></i>
+                    ${savedLink}
+                  </a>
+                  <button data-remove="${project.day}" title="Remove link">
+                    <i class="fas fa-times"></i>
+                  </button>
+                </div>
+              ` : ''}
+            ` : ''}
+            ${isCustom ? `
+              <button class="btn btn-danger" data-delete="${project.day}" style="margin-top: 0.5rem;">
+                <i class="fas fa-trash"></i>
+                Delete Project
+              </button>
+            ` : ''}
+          </div>
+        </div>
+      `;
+      
+      return card;
+    }
+
+    function renderAchievements() {
+      const completedProjects = projects.filter(p => p.is_completed).length;
+      achievementsContainer.innerHTML = '';
+      
+      achievements.forEach(achievement => {
+        let progress = 0;
+        let current = 0;
+        
+        if (achievement.streak) {
+          current = calculateCurrentStreak();
+          progress = Math.min((current / achievement.requirement) * 100, 100);
+        } else if (achievement.category) {
+          const categoryCompleted = projects.filter(p => 
+            p.category === achievement.category && p.is_completed
+          ).length;
+          current = categoryCompleted;
+          progress = Math.min((categoryCompleted / achievement.requirement) * 100, 100);
+        } else {
+          current = completedProjects;
+          progress = Math.min((completedProjects / achievement.requirement) * 100, 100);
+        }
+        
+        const isUnlocked = current >= achievement.requirement;
+        
+        const achievementCard = document.createElement('div');
+        achievementCard.className = `achievement-card ${isUnlocked ? 'unlocked' : 'locked'}`;
+        achievementCard.innerHTML = `
+          <div class="achievement-icon">
+            <i class="${achievement.icon}"></i>
+          </div>
+          <div class="achievement-title">${achievement.title}</div>
+          <div class="achievement-desc">${achievement.description}</div>
+          <div class="achievement-progress">
+            <div class="achievement-progress-fill" style="width: ${progress}%"></div>
+          </div>
+          <div class="achievement-stats">
+            ${isUnlocked ? '🎉 Unlocked!' : `${current}/${achievement.requirement} (${Math.round(progress)}%)`}
+          </div>
+        `;
+        
+        achievementsContainer.appendChild(achievementCard);
+      });
+    }
+
+    function escapeHtml(str) {
+      if (!str) return '';
+      return str.replace(/[&<>"']/g, s => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;','\'':'&#39;'}[s]));
+    }
+
+    function updateProgress() {
+      const completed = projects.filter(p => p.is_completed).length;
+      const total = projects.length;
+      const progressPercent = ((completed / total) * 100).toFixed(1);
+      
+      progressBar.style.width = `${progressPercent}%`;
+      progressText.textContent = `${completed} of ${total} projects completed`;
+      completedCount.textContent = completed;
+      remainingCount.textContent = total - completed;
+      percentage.textContent = `${progressPercent}%`;
+      streakCount.textContent = calculateCurrentStreak();
+    }
+
+    function updateProgressAnalytics() {
+      const completed = projects.filter(p => p.is_completed).length;
+      const total = projects.length;
+      
+      // Calculate average per week (assuming 52 weeks in a year)
+      const avgPerWeek = (completed / 52).toFixed(1);
+      const completionRateValue = ((completed / total) * 100).toFixed(1);
+      const remainingDays = completed > 0 ? Math.ceil((total - completed) / (completed / 365)) : 365;
+      
+      avgWeekly.textContent = avgPerWeek;
+      completionRate.textContent = `${completionRateValue}%`;
+      daysRemaining.textContent = remainingDays > 365 ? '365+' : remainingDays;
+      
+      if (completed > 0) {
+        const estimatedDate = new Date();
+        estimatedDate.setDate(estimatedDate.getDate() + remainingDays);
+        estimatedCompletion.textContent = estimatedDate.toLocaleDateString();
+      } else {
+        estimatedCompletion.textContent = '-';
+      }
+      
+      // Update weekly stats
+      const thisWeekCompleted = Math.floor(completed / 52);
+      weeklyStats.textContent = `This week: ${thisWeekCompleted} projects, ${((thisWeekCompleted / 7) * 100).toFixed(1)}% of weekly goal`;
+    }
+
+    function updateAchievements() {
+      const completedProjects = projects.filter(p => p.is_completed).length;
+      const unlockedAchievements = achievements.filter(achievement => {
+        if (achievement.streak) {
+          return calculateCurrentStreak() >= achievement.requirement;
+        } else if (achievement.category) {
+          return projects.filter(p => 
+            p.category === achievement.category && p.is_completed
+          ).length >= achievement.requirement;
+        } else {
+          return completedProjects >= achievement.requirement;
+        }
+      }).length;
+      
+      const nextAchievementToUnlock = achievements.find(achievement => {
+        if (achievement.streak) {
+          return calculateCurrentStreak() < achievement.requirement;
+        } else if (achievement.category) {
+          return projects.filter(p => 
+            p.category === achievement.category && p.is_completed
+          ).length < achievement.requirement;
+        } else {
+          return completedProjects < achievement.requirement;
+        }
+      });
+      
+      achievementsUnlocked.textContent = unlockedAchievements;
+      achievementsTotal.textContent = achievements.length;
+      achievementsProgress.textContent = `${Math.round((unlockedAchievements / achievements.length) * 100)}%`;
+      nextAchievement.textContent = nextAchievementToUnlock ? nextAchievementToUnlock.title : 'All unlocked!';
+      
+      renderAchievements();
+    }
+
+    function calculateCurrentStreak() {
+      // Simple streak calculation based on consecutive completed projects
+      let streak = 0;
+      const sortedProjects = [...projects].sort((a, b) => a.day - b.day);
+      
+      for (let i = 0; i < sortedProjects.length; i++) {
+        if (sortedProjects[i].is_completed) {
+          streak++;
+        } else {
+          break;
+        }
+      }
+      
+      return streak;
+    }
+
+    // ---- Event Handlers ----
+    function toggleCompletion(day) {
+      const projectIndex = projects.findIndex(p => p.day === day);
+      if (projectIndex === -1) return;
+      
+      projects[projectIndex].is_completed = !projects[projectIndex].is_completed;
+      
+      // If marking as incomplete, remove link
+      if (!projects[projectIndex].is_completed) {
+        projects[projectIndex].project_link = '';
+        const links = loadLinks();
+        delete links[day];
+        saveLinks(links);
+      }
+      
+      saveProjects(projects);
+      updateProgress();
+      renderProjects();
+      
+      showToast(projects[projectIndex].is_completed ? 
+        'Project marked as completed! 🎉' : 'Project marked as incomplete');
+    }
+
+    function saveProjectLink(day, url) {
+      if (!url.trim()) {
+        showToast('Please enter a valid URL', true);
+        return;
+      }
+
+      const projectIndex = projects.findIndex(p => p.day === day);
+      if (projectIndex === -1) return;
+      
+      projects[projectIndex].project_link = url;
+      const links = loadLinks();
+      links[day] = url;
+      saveLinks(links);
+      saveProjects(projects);
+      
+      showToast('Project link saved successfully! 🔗');
+      renderProjects();
+    }
+
+    function removeProjectLink(day) {
+      const projectIndex = projects.findIndex(p => p.day === day);
+      if (projectIndex === -1) return;
+      
+      projects[projectIndex].project_link = '';
+      const links = loadLinks();
+      delete links[day];
+      saveLinks(links);
+      saveProjects(projects);
+      
+      showToast('Project link removed!');
+      renderProjects();
+    }
+
+    function deleteCustomProject(day) {
+      if (confirm('Are you sure you want to delete this custom project?')) {
+        projects = projects.filter(p => p.day !== day);
+        customProjects = customProjects.filter(p => p.day !== day);
+        saveProjects(projects);
+        updateProgress();
+        renderProjects();
+        showToast('Custom project deleted!');
+      }
+    }
+
+    function showToast(message, isError = false) {
+      toastMessage.textContent = message;
+      toast.className = `toast ${isError ? 'error' : ''} show`;
+      
+      setTimeout(() => {
+        toast.classList.remove('show');
+      }, 3000);
+    }
+
+    function resetProgress() {
+      if (confirm('Are you sure you want to reset all progress? This cannot be undone.')) {
+        const initialProjects = generateInitialProjects();
+        saveProjects(initialProjects);
+        saveLinks({});
+        
+        projects = initialProjects;
+        customProjects = [];
+        updateProgress();
+        renderProjects();
+        
+        showToast('All progress has been reset 🔄');
+      }
+    }
+
+    function exportData() {
+      const data = {
+        projects: loadProjects(),
+        links: loadLinks(),
+        exportedAt: new Date().toISOString(),
+        version: '1.0'
+      };
+      
+      const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `365-projects-backup-${new Date().toISOString().split('T')[0]}.json`;
+      a.click();
+      URL.revokeObjectURL(url);
+      
+      showToast('Data exported successfully! 📥');
+    }
+
+    async function importData(event) {
+      const file = event.target.files?.[0];
+      if (!file) return;
+      
+      try {
+        const text = await file.text();
+        const data = JSON.parse(text);
+        
+        if (!data.projects || !Array.isArray(data.projects)) {
+          throw new Error('Invalid data format');
+        }
+        
+        if (confirm('This will replace all your current data. Continue?')) {
+          saveProjects(data.projects);
+          if (data.links) saveLinks(data.links);
+          
+          projects = data.projects;
+          customProjects = projects.filter(p => p.is_custom);
+          updateProgress();
+          renderProjects();
+          
+          showToast('Data imported successfully! 📤');
+        }
+      } catch (error) {
+        showToast('Failed to import data: ' + error.message, true);
+      } finally {
+        event.target.value = '';
+      }
+    }
+
+    function showNewProjectModal() {
+      newProjectModal.style.display = 'flex';
+      document.getElementById('projectTitle').focus();
+    }
+
+    function hideNewProjectModal() {
+      newProjectModal.style.display = 'none';
+      newProjectForm.reset();
+    }
+
+    function handleNewProjectSubmit(e) {
+      e.preventDefault();
+      
+      const title = document.getElementById('projectTitle').value.trim();
+      const category = document.getElementById('projectCategory').value;
+      const description = document.getElementById('projectDescription').value.trim();
+      
+      if (!title || !category) {
+        showToast('Please fill in all required fields', true);
+        return;
+      }
+      
+      const projectData = {
+        title: title,
+        category: category,
+        description: description
+      };
+      
+      const newProject = addCustomProject(projectData);
+      updateProgress();
+      renderProjects();
+      hideNewProjectModal();
+      
+      showToast(`"${newProject.title}" added successfully! ✨`);
+    }
+
+    function toggleMobileMenu() {
+      sidebar.classList.toggle('mobile-open');
+    }
+
+    // ---- Event Listeners ----
+    function initEventListeners() {
+      // View navigation
+      document.querySelectorAll('.nav-item[data-view]').forEach(item => {
+        item.addEventListener('click', () => {
+          showView(item.dataset.view);
+        });
+      });
+      
+      document.getElementById('backToDashboard').addEventListener('click', () => showView('dashboard'));
+      document.getElementById('backToDashboard2').addEventListener('click', () => showView('dashboard'));
+
+      // Filter buttons
+      document.querySelectorAll('.filter-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          currentFilter = btn.dataset.filter;
+          renderProjects();
+        });
+      });
+      
+      // Sidebar filter items
+      document.querySelectorAll('.nav-item[data-filter]').forEach(item => {
+        item.addEventListener('click', () => {
+          document.querySelectorAll('.nav-item[data-filter]').forEach(i => i.classList.remove('active'));
+          item.classList.add('active');
+          currentFilter = item.dataset.filter;
+          
+          document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.classList.toggle('active', btn.dataset.filter === currentFilter);
+          });
+          
+          renderProjects();
+        });
+      });
+      
+      // Search input
+      searchInput.addEventListener('input', () => {
+        searchTerm = searchInput.value;
+        renderProjects();
+      });
+      
+      // Project container events (delegation)
+      projectsContainer.addEventListener('click', (e) => {
+        const target = e.target;
+        const button = target.closest('button');
+        if (!button) return;
+        
+        const day = parseInt(button.dataset.day || button.closest('[data-day]')?.dataset.day);
+        if (isNaN(day)) return;
+        
+        if (button.dataset.save) {
+          const input = document.querySelector(`.link-input[data-day="${day}"]`);
+          if (input) {
+            saveProjectLink(day, input.value.trim());
+          }
+        } else if (button.dataset.remove) {
+          removeProjectLink(day);
+        } else if (button.dataset.delete) {
+          deleteCustomProject(day);
+        } else if (!button.dataset.save && !button.dataset.remove && !button.dataset.delete) {
+          toggleCompletion(day);
+        }
+      });
+      
+      // Toolbar buttons
+      document.getElementById('refreshBtn').addEventListener('click', () => {
+        projects = loadProjects();
+        updateProgress();
+        renderProjects();
+        showToast('Data refreshed! 🔄');
+      });
+      
+      document.getElementById('resetBtn').addEventListener('click', resetProgress);
+      document.getElementById('exportBtn').addEventListener('click', exportData);
+      document.getElementById('importBtn').addEventListener('click', () => {
+        document.getElementById('importFile').click();
+      });
+      document.getElementById('importFile').addEventListener('change', importData);
+      
+      // New project functionality
+      document.getElementById('newProjectBtn').addEventListener('click', showNewProjectModal);
+      document.querySelectorAll('.close-modal').forEach(btn => {
+        btn.addEventListener('click', hideNewProjectModal);
+      });
+      newProjectForm.addEventListener('submit', handleNewProjectSubmit);
+      
+      // Close modal when clicking outside
+      newProjectModal.addEventListener('click', (e) => {
+        if (e.target === newProjectModal) {
+          hideNewProjectModal();
+        }
+      });
+      
+      // Mobile menu
+      mobileMenuBtn.addEventListener('click', toggleMobileMenu);
+      
+      // Close mobile menu when clicking outside
+      document.addEventListener('click', (e) => {
+        if (window.innerWidth <= 1024 && 
+            !sidebar.contains(e.target) && 
+            e.target !== mobileMenuBtn &&
+            !mobileMenuBtn.contains(e.target)) {
+          sidebar.classList.remove('mobile-open');
+        }
+      });
+    }
+
+    // ---- Initialization ----
+    function init() {
+      projects = loadProjects();
+      updateProgress();
+      renderProjects();
+      initEventListeners();
+      
+      // Show welcome message
+      setTimeout(() => {
+        const completed = projects.filter(p => p.is_completed).length;
+        if (completed === 0) {
+          showToast('Welcome to your 365-day coding journey! 🎯');
+        }
+      }, 1000);
+    }
+
+    // Start the app
+    init();
+  </script>
+</body>
+</html>

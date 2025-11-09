@@ -305,6 +305,11 @@
       gap: 1rem;
     }
 
+    .project-link {
+      display: flex;
+      gap: 0.5rem;
+    }
+
     .btn {
       padding: 0.75rem 1rem;
       border: none;
@@ -350,7 +355,7 @@
     }
 
     .link-input {
-      width: 100%;
+      flex: 1;
       padding: 0.75rem;
       border: 1px solid var(--border);
       border-radius: 0.75rem;
@@ -816,22 +821,6 @@
         <button class="nav-item" data-filter="cloud">
           <i class="fas fa-cloud"></i>
           <span>Cloud & DevOps</span>
-        </button>
-      </nav>
-      
-      <nav class="nav-section">
-        <div class="nav-title">Tools</div>
-        <button class="nav-item" id="exportBtn">
-          <i class="fas fa-download"></i>
-          <span>Export Data</span>
-        </button>
-        <button class="nav-item" id="importBtn">
-          <i class="fas fa-upload"></i>
-          <span>Import Data</span>
-        </button>
-        <button class="nav-item" id="resetBtn">
-          <i class="fas fa-trash"></i>
-          <span>Reset Progress</span>
         </button>
       </nav>
     </aside>
@@ -1966,19 +1955,33 @@
         const button = target.closest('button');
         if (!button) return;
         
-        const day = parseInt(button.dataset.day || button.closest('[data-day]')?.dataset.day);
-        if (isNaN(day)) return;
-        
+        // Handle save button
         if (button.dataset.save) {
+          const day = parseInt(button.dataset.save);
           const input = document.querySelector(`.link-input[data-day="${day}"]`);
           if (input) {
             saveProjectLink(day, input.value.trim());
           }
-        } else if (button.dataset.remove) {
+          return;
+        }
+        
+        // Handle remove link button
+        if (button.dataset.remove) {
+          const day = parseInt(button.dataset.remove);
           removeProjectLink(day);
-        } else if (button.dataset.delete) {
+          return;
+        }
+        
+        // Handle delete custom project button
+        if (button.dataset.delete) {
+          const day = parseInt(button.dataset.delete);
           deleteCustomProject(day);
-        } else if (!button.dataset.save && !button.dataset.remove && !button.dataset.delete) {
+          return;
+        }
+        
+        // Handle mark complete/incomplete button
+        const day = parseInt(button.dataset.day);
+        if (!isNaN(day)) {
           toggleCompletion(day);
         }
       });
